@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>
+            <%= pageTitle %>
+        </title>
+
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/inboxPage.css">
+
+        <style>
+            a,
+            a:hover,
+            a:focus,
+            a:active {
+                text-decoration: none;
+                color: inherit;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+
+                <div class="offset-md-2  col-md-8 col-xs-12 postContent">
+                    <!-- post detail -->
+                    <div class="row d-flex">
+                        <h3>News</h3>
+                    </div>
+                    <hr class="mt-2 mb-3" />
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <% if (news) { %>
+                            <div style="border-radius:2px;" class="col-md-8 col-xs-8 col-sm-8">
+                                <% news.forEach(function(article) { %>
+                                    <div style="width: 100%;" class="mb-5 card">
+                                        <div style="padding: 0px;background-color:white;" class="content">
+                                            <a href="<%= article.url %>" target="_blank"><img style="width: 100%" class="rounded image" src="<%= article.cover_image %>"></a>
+                                            <div class="p-3">
+                                                <div class="ui header mt-1">
+                                                    <a style="color: blue;" href="<%= article.url %>" target="_blank"><strong><h2><%= article.title %></h2></strong></a>
+                                                </div>
+                                                <div class="ui header mt-1">
+                                                    <div>
+                                                        <a href="https://dev.to/<%= article.user.username %>" target="_blank"><img style="width:10%; display: inline-block" class="rounded-circle image" src="<%= article.user.profile_image %>">
+                                                        <em><h6 style="display: inline-block; font-size: 22px;"><%= article.user.name %></h6></em></a>
+                                                    </div>
+                                                </div>
+                                                <div class="ui content">
+                                                    <p>
+                                                        <%= article.description %>
+                                                    </p>
+                                                    <a href="<%= article.url %>" target="_blank" class="btn btn-info mb-1 btn-sm">Read More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                        <% } %>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</body>
+<script>
+    let userLoggedIn = <%- JSON.stringify(user) %>
+</script>
+<%- include('../layouts/strapAndJQuery.ejs') %>
+
+</html>

@@ -1,0 +1,198 @@
+body {
+    font-family: cursive;
+    background-image: linear-gradient( to right, #99f8d59f, #0dc480b9), url("../assets/img/andrew-neel-ute2XAFQU2I-unsplash.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    border-radius: .5rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.container form {
+    /* height: 600px; */
+    max-width: 500px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #ffffffda;
+    border-radius: 1rem;
+    font-family: cursive;
+}
+
+h2 {
+    margin: 30px 0 10px 0;
+    /* display: inline-block;*/
+    text-align: center;
+    -webkit-background-clip: text;
+    text-align: center;
+    color: #009961;
+    /*background-image: linear-gradient(to right, #bdf7e2, #009961);*/
+}
+
+,
+user-message {
+    color: black
+}
+
+p {
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    color: rgb(122, 120, 120);
+}
+
+.btn-primary {
+    color: #fff;
+    background-image: linear-gradient( to right, #99f8d5ee, #068b5ad5);
+    border-image-source: linear-gradient( to right, #068b5ad5, #99f8d5ee);
+    height: 40px;
+    width: 93%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-image: linear-gradient( to right, #6ddbb3, #068b5a);
+    border-image-source: linear-gradient( to right, #6ddbb3, #068b5a);
+}
+
+.btn-primary.focus,
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem #ffffff00;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: #fff;
+    background-image: linear-gradient( to right, #60c9a2, #067e52);
+    border-image-source: linear-gradient( to right, #5ebe9b, #057c51);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-image: linear-gradient( to right, #60c9a2, #067e52);
+    border-image-source: linear-gradient( to right, #5ebe9b, #057c51);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem #ffffff05;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.form-group1 {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    text-align: left;
+    color: rgb(122, 120, 120);
+}
+
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(rgba(0, 0, 0, 0.575), white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textfield;
+    background-color: -internal-light-dark(rgba(255, 255, 255, 0.678), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px cursive;
+    padding: 1px 2px;
+    border-width: 1px;
+    border-style: none;
+    border-image: initial;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    padding-left: .25rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: .25rem;
+}
+
+.form-control:hover {
+    border: 10px solid;
+    border-image-source: linear-gradient( to right, #99f8d59f, #0dc480b9);
+    border-image-slice: 1;
+    border-width: 2px;
+    border-style: solid;
+}
+
+
+/*.form-control:focus,.form-control.focus{
+border-color: #963508;
+}*/
+
+
+/*.form-control.disabled,
+.form-control:disabled {
+	color: #fff;
+	background-color: #bb0707;
+	border-color: #af1010;
+}*/
+
+.form-control:focus {
+    color: #2c2c2c;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(32, 141, 5, 0.007);
+}
+
+
+/*.form-control:not(:disabled):not(.disabled).active:focus,
+.form-control:not(:disabled):not(.disabled):active:focus,
+.show > .form-control.dropdown-toggle:focus {
+	box-shadow: 0 0 0 0.2rem rgb(161, 42, 12);
+}*/
+
+.form-control:hover {
+    border-color: linear-gradient( to right, #99f8d59f, #0dc480b9);
+}
+
+
+/*.form-control.active,.form-control:active{
+    box-shadow: 0 0 0 0.2rem rgb(161, 42, 12);
+}*/
+
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-right: 8px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}

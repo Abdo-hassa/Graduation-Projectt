@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>
+            <%= pageTitle %>
+        </title>
+
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="/assets/css/scrollbar.css"> -->
+        <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+
+        <link rel="stylesheet" href="/assets/css/inboxPage.css">
+        <link rel="stylesheet" href="/assets/css/chatPage.css">
+
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <%- include('../layouts/navbar.ejs') %>
+            <div class="row">
+                <!-- <nav class="col-2"> -->
+                <!-- <a class="blue" href="/"> -->
+                <!-- <i class="fas fa-dove" aria-hidden="true"> -->
+
+                <!-- </i></a><a href="/"><i class="fas fa-home" aria-hidden="true"></i></a><a href="/search"><i class="fas fa-search" aria-hidden="true"></i></a>
+                    <a href="/notifications"><i class="fas fa-bell" aria-hidden="true"></i></a><a href="/messages"><i class="fas fa-envelope" aria-hidden="true"></i></a><a href="/profile"><i class="fas fa-user" aria-hidden="true"></i></a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></a> -->
+                <!-- </nav> -->
+                <div class="mainSectionContainer offset-md-2  col-md-8 col-xs-12">
+                    <div class="titleContainer">
+                        <h1>Chat</h1>
+                    </div>
+                    <% if(errorMessage) { %>
+                        <%= errorMessage %>
+                            <% } else { %>
+                                <div class="chatPageContainer">
+                                    <div class="chatTitleBarContainer">
+                                        <div class="chatImagesContainer">
+                                            <% for (let user of chat.users) { %>
+                                                <img src="/<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>">
+                                                <% } %>
+                                        </div>
+                                        <span id="chatName" data-toggle="modal" data-target="#chatNameModal"><% if(chat) { %><%= chat.chatName %><% } %></span>
+                                    </div>
+                                    <div class="mainContentContainer">
+                                        <div class="chatContainer" data-room="<% if(chat) { %><%= chat._id %><% } %>">
+                                            <ul class="chatMessages">
+                                            </ul>
+                                            <div class="typingDots">
+                                                <img src="/<%=dots%>" alt="Typing dots">
+                                            </div>
+                                            <div class="footer">
+                                                <textarea style="border: none; outline: none;" class="inputTextbox" name="messageInput" placeholder="Type a message...">
+                                                </textarea>
+                                                <button style="border: none; outline: none;" class="sendMessageButton">
+                                                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <!-- <div class="d-none d-md-block col-md-2 col-lg-4"></div> -->
+
+                </div>
+            </div>
+
+            <!-- chatName modal -->
+            <div class="modal fade" id="chatNameModal" tabindex="-1" role="dialog" aria-labelledby="chatNameModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="chatNameModalLabel">Change the chat name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <input id="chatNameTextbox" type="text" placeholder="Enter a name for this chat" value="<% if(chat) { %><%= chat.chatName %><% } %>">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="chatNameButton" type="button" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    </div>
+
+
+
+
+</body>
+<script>
+    let chatId = <%- JSON.stringify(chat._id) %>
+    let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+</script>
+<%- include('../layouts/strapAndJQuery.ejs') %>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="/js/chatPage.js"></script>
+    <script src="/js/common.js"></script>
+
+
+</html>

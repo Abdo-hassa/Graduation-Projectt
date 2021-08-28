@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register</title>
+
+    <link href="/auth/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/img/logo-white.png" rel="icon">
+    <meta name="keywords" content="Login , registration, forgot password " ./>
+    <link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700,400italic,500italic,600italic,700italic' rel='stylesheet' type='text/css'>
+    <link href="/assets/css/errormessages.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-02">
+        <div class="two-login  hvr-float-shadow">
+            <div class="two-login-head">
+                <img src="/images/top-note.png" alt="" />
+                <h2>register</h2>
+                <lable></lable>
+            </div>
+            <form method="POST" action="/auth/register" novalidate>
+                <% if (errorMassage) { %>
+                    <div class="user-message user-message--error">
+                        <h4 class="animate ">
+                            <%= errorMassage %>
+                        </h4>
+                    </div>
+                    <% } %>
+                        <li>
+                            <input type="text" class="text <%= validationErrors.find(e => e.param === 'name') ? 'invalid blinking' : '' %>" value="<%= oldInput.name %>" name="name" id="name" placeholder="Name">
+                            <a href="#" class=" icon2 user2"></a>
+                        </li>
+                        <li>
+                            <input type="hidden" name="redirectTo" value="<%= redirectTo %>">
+
+                            <input type="text" class="text <%= validationErrors.find(e => e.param === 'email') ? 'invalid blinking' : '' %>" value="<%= oldInput.email %>" name="email" id="email" placeholder="Email">
+                            <a href="#" class=" icon2 mail"></a>
+                        </li>
+                        <li>
+                            <input type="password" class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid blinking' : '' %>" value="<%= oldInput.password %>" name="password" id="password" placeholder="Password">
+                            <a href="#" class=" icon2 lock2"></a>
+                        </li>
+                        <li>
+                            <input type="password" class="<%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid blinking' : '' %>" name="confirmPassword" id="password2" placeholder="Confrim password" value="<%= oldInput.confirmPassword %>">
+                            <a href="#" class=" icon2 lock2"></a>
+                        </li>
+                        <div class="p-container">
+                        </div>
+                        <div class="submit two">
+                            <input type="submit" value="SIGN UP">
+                        </div>
+                        <h5>Already a member ?<a href="/auth/login"> Login Here</a></h5>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

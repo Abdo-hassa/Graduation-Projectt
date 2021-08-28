@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>
+            <%= pageTitle %>
+        </title>
+
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/inboxPage.css">
+        <link rel="stylesheet" href="/assets/css/notificationPage.css">
+
+        <style>
+            .resultsContainer a {
+                color: #000 !important;
+            }
+            
+            .resultsContainer a:hover {
+                color: #702C91 !important;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+
+                <div class="offset-md-2  col-md-8 col-xs-12 postContent">
+                    <!-- post detail -->
+                    <div class="row d-flex">
+                        <h3 class="ml-3">Notifications</h3>
+                        <button id="markNotificationAsRead" class="ml-auto mr-3">
+                            <i class="fas fa-check-double"></i>
+                        </button>
+                    </div>
+                    <div class="resultsContainer"></div>
+                    <hr class="mt-2 mb-3" />
+                </div>
+
+            </div>
+        </div>
+</body>
+<script>
+    /* eslint-disable */
+    var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+</script>
+<%- include('../layouts/strapAndJQuery.ejs') %>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="/js/notificationPage.js"></script>
+    <script src="/js/common.js"></script>
+
+
+</html>

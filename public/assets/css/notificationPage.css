@@ -1,0 +1,13 @@
+.resultListItem.active {
+    background-color: rgba(212, 237, 255, 0.6);
+}
+
+.resultListItem.notification * {
+    pointer-events: none;
+}
+
+#markNotificationAsRead {
+    border: none !important;
+    background: white !important;
+    outline: none !important;
+}

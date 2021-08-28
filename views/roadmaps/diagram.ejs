@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>Roadmap</title>
+        <%- include('../layouts/vendorCss.ejs') %>
+            <link href="/assets/css/roadmap.css" rel="stylesheet">
+            <link href="/assets/css/navbar.css" rel="stylesheet">
+            <link href="/assets/css/style.css" rel="stylesheet">
+            <link rel="stylesheet" href="/assets/css/scrollbar.css">
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+            <style>
+                a {
+                    text-decoration: none;
+                    color: blue;
+                }
+                
+                h6 {
+                    color: #702C91 !important
+                }
+                
+                .card-content h6.head {
+                    margin-top: 10px;
+                    /*margin-bottom: 50px;*/
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+                /* .card-content p.para{
+
+            }  */
+                
+                .timeline-block {
+                    margin-bottom: 80px;
+                }
+                
+                @media (max-width: 767px) {
+                    .section-title h1 {
+                        font-size: 30px !important;
+                    }
+                    .section-title p {
+                        font-size: 17px !important;
+                    }
+                    .section-title {
+                        height: 400px;
+                    }
+                }
+                
+                @media (max-width: 430px) {
+                    .section-title h1 {
+                        font-size: 30px !important;
+                    }
+                    .section-title p {
+                        font-size: 17px !important;
+                    }
+                    .section-title {
+                        height: 500px !important;
+                    }
+                }
+                
+                @media (max-width: 1100px) {
+                    .section-title h1 {
+                        font-size: 30px !important;
+                    }
+                    .section-title p {
+                        font-size: 20px !important;
+                    }
+                    .section-title {
+                        height: 600px;
+                    }
+                }
+            </style>
+
+</head>
+
+<body>
+
+    <!-- <div class="container border border-dark"> -->
+    <%- include('../layouts/navbar.ejs') %>
+
+
+        <section id="experience" class="section">
+            <div class="container">
+                <!-- SECTION TITLE -->
+                <div class="section-title" style="height: 300px;">
+                    <h1 style="text-align: center; font-size: 50px; color: #702C91;">
+                        <%= roadmap.title %>
+                    </h1>
+                    <P style="font-size: 25px;text-align: justify; margin-bottom: 20px;line-height: initial;">
+                        <%= roadmap.description %>
+                    </P>
+                    <input id="routeName" type="hidden" value="<%= roadmap.routeName %>">
+                    <button id="submitBookmarkButton" class="btn" style="color:#702C91">
+                    <%if (user.bookmarks.some(road => road.title === roadmap.title)) {%>
+                    <i id='bookmarkIcon' class="far fa-bookmark"></i>
+                    <%}else{%>
+                    <i id='bookmarkIcon' class="fas fa-bookmark"></i>
+
+                    <%}%>
+                </button>
+                    <label class="strong font-weight-bold" for="Bookmark"><b>Bookmark</b></label>
+                </div>
+
+                <div id="timeline-experience">
+
+                    <!-- FIRST TIMELINE -->
+                    <div class="timeline-block">
+                        <!-- TIMELINE CONTENT -->
+                        <% if(steps !==undefined || steps.length !==0) { %>
+                            <% for(let topic of steps){ %>
+                                <!-- THIRD TIMELINE -->
+                                <div class="timeline-block">
+                                    <!-- DOT -->
+                                    <div class="timeline-dot">
+                                        <h6>
+                                            <%= count  %>
+                                        </h6>
+                                    </div>
+                                    <!-- TIMELINE CONTENT -->
+                                    <div class="card timeline-content">
+                                        <a>
+                                            <div class="card-content">
+                                                <!-- TIMELINE TITLE -->
+                                                <a href="/roadmaps/<%= roadmap.routeName %>/<%= topic.routeName %>">
+                                                    <h6 class="timeline-title head">
+                                                        <%= topic.title %>
+                                                    </h6>
+                                                </a>
+                                                <!-- TIMELINE TITLE INFO -->
+                                                <div class="timeline-info">
+
+                                                </div>
+                                                <!-- TIMELINE PARAGRAPH -->
+                                                <p>
+                                                    <%= topic.description %>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <% count =   count+1 %>
+
+                                    <% } %>
+                                        <% } %>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('../layouts/footer.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
+                <script src="/js/common.js"></script>
+
+
+
+
+</body>
+
+</html>

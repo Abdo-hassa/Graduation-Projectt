@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= error %>
+    </title>
+    <%- include('./layouts/head.ejs') %>
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <%- include('./layouts/navbar.ejs') %>
+
+        <div class="container mt-5">
+            <!-- Header -->
+            <header id="header" class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="text-container">
+                                <h3 class="h1-large">
+                                    <%= error %>
+                                </h3>
+
+                                <a class="btn-outline-lg" style="cursor: pointer;" onclick="goBack()">Back</a>
+                            </div>
+                            <!-- end of text-container -->
+                        </div>
+                        <!-- end of col -->
+                        <div class="col-lg-7">
+                            <div class="image-container">
+                                <img id="image-banner" class="img-fluid" style="width: 80%;" src="/images/404-removebg-preview.png" alt="alternative">
+                            </div>
+                            <!-- end of image-container -->
+                        </div>
+                        <!-- end of col -->
+                    </div>
+                    <!-- end of row -->
+                </div>
+                <!-- end of container -->
+            </header>
+        </div>
+
+
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
+        <%- include('./layouts/strapAndJQuery.ejs') %>
+            <script>
+                function goBack() {
+                    if (window.history.length === 1) {
+                        // its the first page
+                        window.location = "/timeline";
+                    } else {
+                        history.back();
+                    }
+                }
+            </script>
+</body>
+
+</html>

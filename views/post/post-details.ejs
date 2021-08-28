@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>post Details</title>
+
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/button.css">
+        <link rel="stylesheet" href="/assets/css/postDetails.css">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+                <div class="mb-2 col-md-2 d-none d-md-block ">
+                    <!-- <a class="blue" href="/"><i class="fas fa-dove"></i></a> -->
+                    <!-- <nav class="col-2 sidebar">
+                        <a href="/"><i class="fas fa-home"></i></a>
+                        <a href="/search"><i class="fas fa-search"></i></a>
+                        <a href="/notifications"><i class="fas fa-bell"></i></a>
+                        <a href="/messages"><i class="fas fa-envelope"></i></a><a href="/profile"><i
+                                class="fas fa-user"></i></a>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+                    </nav> -->
+
+                    <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                </div>
+                <div class="col-lg-6 col-md-10 postContent">
+                    <!-- post detail -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
+                    <!-- maybe latest news -->
+                </div>
+            </div>
+
+
+            <!-- likers modal -->
+            <div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="likesModalLabel">Edit Post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="similarContainer"></div>
+                            <!-- <div class="tab-pane fade show active" id="likesPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                </div>
+                                            </div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <!-- <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- post comments modal -->
+            <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="replyModalLabel">Reply</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="originalPostContainer"></div>
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                <div class="form-group">
+                                    <label class="sr-only" for="post">post</label>
+                                    <textarea style="resize: none;height:100px" class="form-control" name="reply" id="reply" rows="3" placeholder="What are you thinking..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- post delete modal -->
+            <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deletePostModalLabel">Delete the post?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>You won't be able to delete this.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="deletePostButton" type="button" class="btn btn-primary">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                let selectedTap = <%- JSON.stringify(selectedTap) %>
+
+                /* eslint-disable */
+                var postId = <%- JSON.stringify(postId) %>
+                var userLoggedIn = <%- JSON.stringify(user) %>
+            </script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
+                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+                <script src="/js/followersAndFollwing.js"></script>
+                <script src="/js/common.js"></script>
+                <script src="/js/postPage.js"></script>
+
+</body>
+
+</html>

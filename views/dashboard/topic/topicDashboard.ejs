@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../../layouts/head.ejs') %>
+
+        <title>Topic Dashboard</title>
+
+
+        <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+        <!-- ================== END ====================== -->
+</head>
+
+<body>
+    <%- include('../../layouts/navbar.ejs') %>
+
+        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+                <div class="mb-2 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>
+                                Dashboard
+                            </h3>
+                            <div class="flex items-center mb-4">
+                                <a href="/admin/dashboard/users">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                            <i style="margin-right: 16px;" class="far fa-user"></i>
+                                            Users
+                                        </h4>
+                                    </span>
+                                </a>
+                            </div>
+                            
+                            
+                            <div class="flex items-center mb-4">
+                                <a href="/admin/dashboard/feedback">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                            <i style="margin-right: 14px;" class="fab fa-accusoft"></i>
+                                           Feedback
+                                        </h4>
+                                    </span>
+                                </a>
+                            </div>
+                           
+                            <div class="flex items-center mb-4">
+                                <a href="/admin/dashboard/posts">
+                                    <h4>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
+                                            <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
+                                            <path
+                                                d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
+                                            </path>
+                                        </svg> Posts
+                                    </h4>
+                                </a>
+                            </div>
+                            <div class="flex items-center">
+                                <a href="/admin/dashboard/roadmaps">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                            <i style="margin-right: 16px;" class="fas fa-road"></i>
+                                            Roadmaps
+                                        </h4>
+                                    </span>
+                                </a>
+                            </div>
+                           <br>
+                            <div class="flex items-center">
+                                <a href="/admin/dashboard/topics">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                            <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
+                                           All Topics
+                                        </h4>
+                                    </span>
+                                </a>
+                            </div>
+                            <% for (let roadmap of roadmaps) { %>
+                                <div class="flex items-center">
+                                    <a href="/admin/dashboard/topics/<%=roadmap.routeName%>">
+
+                                        <span style="display: inline-block; margin-left: 40px;">
+                                        <h6>
+                                            <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
+                                            <%=roadmap.title%>
+                                        </h6>
+                                    </span>
+                                    </a>
+                                </div>
+                                <%}%>
+                        </div>
+                    </div>
+                </div>
+                <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                <div class="col">
+
+                    <a href="/admin/dashboard/topics/create">
+                        <button class="btn btn-outline-info scrollto">Add Topic</button>
+                    </a>
+                    <br><br><br>
+                    <% if (topics !==undefined || topics !==null) { %>
+                        <% topics.forEach(function(topic) { %>
+                            <div id="topic" class="crayons-story " data-content-user-id="219080">
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div>
+                                                <a href="" class="crayons-story__secondary fw-medium">
+                                                    <h3>
+                                                        <%=topic.title%>
+                                                    </h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                <%=topic.summary%>
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+
+                                            <span class="crayons-tag__prefix"></span> Roadmaps :
+                                            <%for (let roadmap of topic.roadmaps){ %>
+                                                <%=roadmap.title%>,
+                                                    <%}%>
+
+                                                        <br>
+
+                                        </div>
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+
+
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                <a type="button" href="/admin/dashboard/topics/edit/<%=topic._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
+                                                    <span class="bm-initial">edit</span>
+                                                </a>
+                                                <input name="topicId" type="hidden" value="<%=topic._id%>">
+                                                <button style="color: #000;" class="btn btn-outline-danger scrollto" onclick="deleteTopic(this)">Delete</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% } %>
+
+                                    <!-- Post Ends -->
+                                    <!-- endpost -->
+                                    <!-- Post Ends -->
+                </div>
+                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                    <!-- aside latest news -->
+                    <aside class="widget">
+                        <div class="widget blog-widget">
+                            <h2 class="widget-header">
+
+                            </h2>
+                            <!-- beginning of first news -->
+                            <!-- beginning of first news -->
+
+
+                            <!-- ending of first news -->
+
+
+                            <!-- ending of first news -->
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
+        <%- include('../../layouts/strapAndJQuery.ejs') %>
+            <script src="/assets/js/admin.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+
+        <title>Roadmaps</title>
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <%- include('../layouts/vendorCss.ejs') %>
+            <!-- Template Main CSS File -->
+            <link href="assets/css/style.css" rel="stylesheet">
+            <link href="assets/css/navbar.css" rel="stylesheet">
+            <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+
+
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+
+        <br>
+        <!-- beginning of main section -->
+        <main id="main">
+            <!-- beginning of main section -->
+            <% if(roadmaps.length > 0) { %>
+                <section id="services" class="services mb-5">
+                    <% } else { %>
+                        <section id="services" class="services mb-5" style="height:60vh">
+                            <% } %>
+                                <div class="container">
+
+                                    <div class="section-title">
+                                        <h2>Road Maps</h2>
+                                    </div>
+
+                                    <div class="row">
+                                        <% if(roadmaps.length > 0) { %>
+                                            <% for (let i=0; i < roadmaps.length; i++) { %>
+                                                <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
+                                                    <div class="icon-box w-100">
+                                                        <div class="icon"><i class="bx bx-window-alt"></i></div>
+                                                        <% if(!isAuthenticated) { %>
+                                                            <a href="/roadmaps/<%= roadmaps[i].routeName %>?redirectTo=/roadmaps/<%= roadmaps[i].routeName %>">
+                                                                <% } else { %>
+                                                                    <a href="/roadmaps/<%= roadmaps[i].routeName %>">
+                                                                        <% } %>
+                                                                            <h4>
+                                                                                <%= roadmaps[i].title %>
+                                                                            </h4>
+                                                                    </a>
+                                                                    <p>
+                                                                        <%= roadmaps[i].summary %>
+                                                                    </p>
+
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                                    <% } else { %>
+                                                        <h1>There's no roadmaps provided now ⚠️</h1>
+                                                        <% } %>
+
+                                    </div>
+
+                        </section>
+                        <!-- End Services Section -->
+                        <!-- ======= Faq Section ======= -->
+
+                        <!-- End Faq Section -->
+
+                        <!-- ======= Contact Section ======= -->
+
+        </main>
+        <!-- footer -->
+        <%- include('../layouts/footer.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(user) %>
+            </script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
+</body>
+
+</html>

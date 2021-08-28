@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .w3-third .bigbtn {
+        border: 1px solid #e3e3e3;
+        background-color: #E7E9EB;
+        color: #555;
+        margin-bottom: 16px;
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        vertical-align: middle;
+        display: inline-block;
+        text-decoration: none !important;
+        border-radius: 5px;
+    }
+    
+    .bigbtn:hover,
+    .bigbtn2:hover {
+        background-color: #28352b;
+        color: #ffffff !important;
+        border: 1px solid #555;
+    }
+    
+    @media screen and (max-width: 992px) {
+        .bigbtn {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('../layouts/head.ejs') %>
+        <title>Topic</title>
+
+        <!-- Google Fonts -->
+        <link href="/img/logo-white.png" rel="icon">
+
+
+        <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+        <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+        <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <!-- <link href="assets/css/slider.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="assets/css/scrollbar.css">
+
+
+        <style>
+            pre code {
+                background-color: rgb(195, 243, 177);
+                border: 1px solid #999;
+                display: block;
+                padding: 2px;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
+        <!-- carousel -->
+        <!-- SLIDER WITH CAPTIONS -->
+
+        <!-- </div> -->
+
+        <!-- beginning of main section -->
+        <main id="main">
+
+
+            <section id="services" class="services mb-5">
+                <div class="container">
+
+                    <div>
+                        <br>
+                        <h2 style="font-size:56px;font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    text-align: center;color:#702C91">
+                            <%=topic.title%>
+                        </h2>
+                        <h4>
+                            <%=topic.description%>
+                        </h4>
+                    </div>
+                    <!-- <pre>
+                    <code>
+                        
+                            body
+                            {
+                             &nbsp;&nbsp;background-color: lightblue;
+                            }
+                            h1
+                            {
+                            &nbsp;&nbsp;color: white;
+                            &nbsp;&nbsp;text-align: center;
+                            }
+                            p
+                            { 
+                            &nbsp;&nbsp;font-family: verdana;
+                            &nbsp;&nbsp;font-size: 20px;
+                            }
+
+                    </code>
+                </pre> -->
+                    <br>
+                    <br>
+                    <%if(topic.video){%>
+                        <div class="section-title">
+                            <h2>Take a brief look</h2>
+
+                        </div>
+                        <br>
+                        <iframe width="100%" height="515" src="<%=topic.video%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+                        <%}%>
+                            <div class="section-title">
+                                <h2>Refernces</h2>
+                            </div>
+                            <!-- <div class="col-lg-6 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch list-group">
+                        <% for(let reference of topic.references) {%>
+                            <%referencee = reference.split('-')%>
+                            <a href="<%=referencee[1]%>" class="list-group-item list-group-item-action">
+                               <%=referencee[0]%>
+                            </a>
+                            <%}%>
+                    </div> -->
+                            <div class="row" style="margin-left:-16px;margin-right:-16px">
+                                <% for(let reference of topic.references) {%>
+                                    <%referencee = reference.split(' ')%>
+                                        <div class="w3-third col-3">
+                                            <a class="bigbtn" href="<%=referencee[1]%>" target="_blank">
+                                                <%=referencee[0]%>
+                                            </a>
+                                        </div>
+                                        <%}%>
+
+                                            <!-- <div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_html_browsersupport.asp">Browser Support</a>
+</div>
+
+
+<div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_attributes.asp">Attributes</a>
+</div>
+
+
+<div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_standardattributes.asp">Global Attributes</a>
+</div>
+
+<div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_eventattributes.asp">Event Attributes</a>
+</div>
+
+
+<div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_colornames.asp">Color Names</a>
+</div>
+
+
+<div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_canvas.asp">Canvas</a>
+</div>
+
+<div class="w3-third col-3">
+  <a class="bigbtn" href="/tags/ref_av_dom.asp">Audio/Video DOM</a>
+</div> -->
+
+                            </div>
+
+
+            </section>
+
+
+
+            <!-- End Services Section -->
+            <!-- ======= Faq Section ======= -->
+
+            <!-- End Faq Section -->
+
+            <!-- ======= Contact Section ======= -->
+
+        </main>
+        <!-- footer -->
+        <%- include('../layouts/footer.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
+
+                <!-- <script src="/assets/vendor/jquery/jquery.min.js"></script>
+            <script src="/bootstrap/js/bootstrap.min.js"></script> -->
+
+</body>
+
+</html>

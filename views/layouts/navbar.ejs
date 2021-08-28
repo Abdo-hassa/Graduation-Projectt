@@ -1,0 +1,74 @@
+<nav class="navbar sticky-top navbar-expand-sm d-block bg-darkk">
+    <div class="container-fluid">
+        <a class="navbar-brand" style=" font-weight: bold; font-stretch: wider;" href="/">
+            <!-- <img class="navbar-brand" src="/assets/img/background_250x100.png" alt="zero to one">  -->
+            ZERO TO ONE
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="toggler navbar-toggler-icon "> <i class="fas fa-bars"
+                    style="color:#fff; font-size:28px;"></i></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="ml-auto navbar-nav">
+
+                <li class="hvr-underline-from-center">
+                    <a class="nav-link" href="/timeline">Timeline</a>
+                </li>
+                <li class="hvr-underline-from-center">
+                    <a class="nav-link" href="/explore">Explore</a>
+                </li>
+                <% if(isAuthenticated) { %>
+                    <li class="hvr-underline-from-center">
+                        <a class="nav-link" href="/news">News</a>
+                    </li>
+                    <li class="hvr-underline-from-center">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    <% } %>
+                        <li class="hvr-underline-from-center">
+                            <a class="nav-link" href="/roadmaps">Roadmaps</a>
+                        </li>
+                        <% if(isAuthenticated && userid !==null ) { %>
+
+                            <li class="">
+                                <a class="nav-link" href="/notifications">
+                                    <i class="fas fa-bell"></i>
+                                    <span id="notificationBadge"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link" href="/messages">
+                                    <i class="fas fa-envelope"></i>
+                                    <span id="messagesBadge"></span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Options
+                                        </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/users/profile/<%= currentUser.username%>">Profile</a>
+                                    <a class="dropdown-item" href="/users/updateProfile">Edit Profile</a>
+                                    <a class="dropdown-item" href="/messages">Messages</a>
+                                    <%if (isAdmin) {%>
+                                        <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
+                                        <% } %>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/auth/logout">Logout</a>
+                                </div>
+                            </li>
+                            <% } else { %>
+                                <li class="hvr-underline-from-center">
+                                    <a class="nav-link" href="auth/login">Login</a>
+                                </li>
+                                <li class="hvr-underline-from-center">
+                                    <a class="nav-link" href="auth/register">Get Started</a>
+                                </li>
+                                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,69 @@
+<!-- footer -->
+<footer id="footer">
+
+    <div class="footer-newsletter" data-aos="fade-up">
+        <div class="container mb-2">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h4>zero to one</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/images/zerotoone.png" style="max-width:100%" alt="zero to one">
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="text-left">Useful Links</h5>
+                    <ul class="pl-1">
+                        <li><i class="bx bx-chevron-right"></i><a class="footer" href="/">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i><a class="footer" href="/news">News</a></li>
+                        <li><i class="bx bx-chevron-right"></i><a class="footer" href="/roadmaps">Roadmaps</a></li>
+
+                        <li><i class="bx bx-chevron-right"></i><a class="footer" href="/">contact us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
+                    <% if(roadmaps.length > 0) { %>
+                        <h5 class="text-left">Our Roadmaps</h5>
+                        <ul class="pl-1">
+
+                            <%   for (var i = 0; i < roadmaps.length; i++) { %>
+                                <% if (i < 5) { %>
+                                    <li><i class="bx bx-chevron-right"></i>
+                                        <a class="footer" href="/roadmaps/<%=roadmaps[i].routeName%>">
+                                            <%=roadmaps[i].title%>
+                                        </a>
+                                    </li>
+                                    <% } else{ %>
+                                        <% break; %>
+                                            <% } %>
+                                                <%}%>
+
+                        </ul>
+                        <% } %>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="400">
+                    <h5>Our Social Networks</h5>
+                    <p>If you wanted to follow us you can visit our company at the following links</p>
+                    <div class="social-links mt-3">
+                        <a class="footer" href="/" class="twitter"><i class="bx bxl-twitter"></i></a>
+                        <a class="footer" href="/" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a class="footer" href="/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a class="footer" href="/" class="google-plus"><i class="bx bxl-skype"></i></a>
+                        <a class="footer" href="/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>

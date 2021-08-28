@@ -1,0 +1,97 @@
+body{
+    height:100%;
+    box-sizing: border-box;
+  } 
+  .sidebar{
+      margin-top: 55px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0; 
+    width: 350px; 
+    height: 100vh;
+    overflow-x: hidden;
+    padding-top: 20px;
+    
+  } 
+  .sub{
+    position: absolute;
+    top: 0;
+    right: -100px;
+    width: 100px;
+  }
+
+  .card{  
+    max-width: 840px;
+    min-height: 250px;
+    position: relative;
+     border-radius: 15px;
+  } 
+  .social,.card-text{
+    margin-left: 15px;
+  }
+    a{
+       text-decoration: none; 
+       color:black;
+      
+    } 
+    i{
+      color:lightgraygray !important;
+    } 
+    img{ 
+        width:80%;
+      height: 40%; 
+      position:absolute;
+      top: 20px;
+      left: 50px;
+      border-radius: 15px; 
+    }
+   .btncard button{
+      display: inline-block;
+      position:  absolute;
+      top: 8px;
+      right: 35px;
+      background-color: white;
+      border: 1px solid  black !important; 
+      border-radius: 10px;
+      width: 75px
+                      
+
+    }  
+    .card > hr{
+      width: 90%;
+      position: absolute; 
+      top: 130px; 
+      left: 50px;
+    }
+/*.bg-dark {
+    height: 100%;
+}*/
+.mb-2{
+    margin-top: 10px;
+  
+}
+.general{
+    margin-top: 8px;
+}
+.form-check-label{
+    margin-top: 0;
+}
+
+span{
+  font-size: 16px;
+  color: #000;
+  
+}
+.checkbox-inline{
+    margin-bottom: 2px;
+}
+input{
+    margin-right: 7px;
+}
+.bg-dark {
+    background-color: #ececec!important;
+}
+label{
+    color: #000;
+}

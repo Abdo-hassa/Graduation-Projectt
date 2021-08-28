@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Edit Roadmap</title>
+    <%- include('../../layouts/head.ejs') %>
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
+
+        <style>
+            label {
+                color: #702C91;
+            }
+            
+            .error-message {
+                color: red;
+            }
+            
+            #submitButton:hover {
+                background-color: #702C91;
+                color: white;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../../layouts/navbar.ejs') %>
+        <div class="container">
+            <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
+                <div class="py-4 rounded col-md-6 offset-md-3">
+                    <h3 style="text-align: center;">Edit roadmap</h3>
+                    <!-- FORM -->
+                    <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
+                    <form action="/admin/dashboard/roadmaps/edit" method="POST" enctype="multipart/form-data" id="submit">
+                        <!-- TEXT FIELD GROUPS -->
+                        <div class="form-group">
+                            <h3>Info</h3>
+                            <label for="name">title</label>
+                            <input class="form-control" type="text" name="title" id="title" placeholder="Enter title" value="<%= roadmap.title%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='title' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">summary</label>
+                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary" value="<%= roadmap.summary%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='summary' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
+                        </div>
+                        <input type="hidden" name="id" value="<%=roadmap._id%>">
+
+                        <div class="form-group">
+                            <label for="password">description</label>
+                            <input class="form-control" type="text" id="address" placeholder="description" name="description" value="<%= roadmap.description%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='description' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">routeName</label>
+                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName" value="<%= roadmap.routeName%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='routeName' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/roadmaps">BACK</a>
+                            </div>
+                            <div class="col-6">
+                                <button id="submitButton" class="mx-auto btn btn-block" style="border: 1px solid #702C91" type="submit">UPDATE</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <%- include('../../layouts/footer.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../../layouts/strapAndJQuery.ejs') %>
+
+
+</body>
+
+</html>

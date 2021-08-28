@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link href="/auth/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/img/logo-white.png" rel="icon">
+
+    <meta name="keywords" content="Login , registration, forgot password " ./>
+    <link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700,400italic,500italic,600italic,700italic' rel='stylesheet' type='text/css'>
+    <link href="/assets/css/errormessages.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!--/start-login-one-->
+    <div class="login-01">
+        <div class="one-login  hvr-float-shadow">
+            <div class="one-login-head">
+                <img src="/images/top-lock.png" alt="" />
+                <h1>LOGIN</h1>
+                <span></span>
+            </div>
+            <form method="POST" action="/auth/login" novalidate>
+                <% if (errorMassage) { %>
+                    <div class="user-message user-message--error">
+                        <h3 class="animate">
+                            <%= errorMassage %>
+                        </h3>
+                    </div>
+                    <% } %>
+                        <li>
+                            <input type="text" class="text <%= validationErrors.find(e => e.param === 'email') ? 'invalid blinking' : '' %>" name="email" value="<%= oldInput.email %>" id="email" placeholder="Email">
+                            <a href="#" class=" icon user"></a>
+                        </li>
+                        <li>
+                            <input type="password" class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid blinking' : '' %>" value="<%= oldInput.password %>" name="password" placeholder="********">
+                            <input type="hidden" name="redirectTo" value="<%= redirectTo %>">
+
+                            <a href="#" class=" icon lock"></a>
+                        </li>
+                        <div class="p-container">
+                            <h6><a href="/auth/reset">Forgot Password ?</a> </h6>
+                            <div class="clear"> </div>
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="SIGN IN">
+                        </div>
+                        <h5>Don't have an account ?<a href="/auth/register"> Sign Up </a></h5>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

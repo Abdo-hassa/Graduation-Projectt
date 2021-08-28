@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../../layouts/head.ejs') %>
+
+        <title>Edit Profile</title>
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
+
+        <style>
+            label {
+                color: #702C91;
+            }
+            
+            .error-message {
+                color: red;
+            }
+            
+            #submitButton:hover {
+                background-color: #702C91;
+                color: white;
+            }
+            
+            label {
+                color: #702C91;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../../layouts/navbar.ejs') %>
+
+        <div class="container">
+
+            <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
+                <div class="py-4 rounded col-md-6 offset-md-3">
+                    <h3 style="text-align: center;">Update Post Information</h3>
+                    <!-- FORM -->
+                    <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
+                    <form action="/admin/dashboard/posts/edit" method="POST" enctype="multipart/form-data" id="submit">
+                        <!-- TEXT FIELD GROUPS -->
+                        <div class="form-group">
+                            <label for="password">Post</label>
+                            <textarea style="resize: none;" class="form-control" name="description" id="post" rows="3"><%= post.description %></textarea>
+                        </div>
+                        <input type="hidden" name="postid" value="<%= post._id%>">
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/posts">BACK</a>
+                            </div>
+                            <div class="col-6">
+                                <button id="submitButton" class="mx-auto btn btn-block" style="border: 1px solid #702C91" type="submit">UPDATE</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <br><br><br><br><br><br>
+        <%- include('../../layouts/footer.ejs') %>
+
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../../layouts/strapAndJQuery.ejs') %>
+
+
+</body>
+
+</html>

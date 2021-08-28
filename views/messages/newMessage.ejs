@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>
+            <%= pageTitle %>
+        </title>
+
+
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/newMessage.css">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+
+        <style>
+            a {
+                pointer-events: none;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+
+                <div class="offset-md-2  col-md-8 col-xs-12 postContent">
+                    <!-- post detail -->
+                    <div class="row d-flex">
+                        <h3>New Message</h3>
+                    </div>
+                    <hr class="mt-2 mb-3" />
+                    <div class="chatTitleBar">
+                        <label for="userSearchTextBox">
+                            To:
+                        </label>
+                        <div id="selectedUsers">
+                            <input type="text" placeholder="type" id="userSearchTextBox">
+                        </div>
+                    </div>
+                    <div class="resultsContainer"></div>
+                    <button id="createChatButton" disabled>Create Chat</button>
+                </div>
+                <!-- maybe latest news -->
+                <!-- <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
+                </div> -->
+            </div>
+        </div>
+        <script>
+            /* eslint-disable */
+            var userLoggedIn = <%- JSON.stringify(userLoggedInJs) %>
+        </script>
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script src="/js/followersAndFollowing.js"></script>
+            <script src="/js/common.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+
+        <title>
+            <%= user.name %>'s | Profile
+        </title>
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="/assets/css/scrollbar.css"> -->
+        <link rel="stylesheet" href="/assets/css/userProfile.css">
+        <link rel="stylesheet" href="/assets/css/button.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+
+        <style>
+            .form-control:focus {
+                border-color: inherit;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <div id="base-payment-pointer" data-payment-pointer="$ilp.uphold.com/24HhrUGG7ekn"></div>
+        <div id="page-content" class="wrapper stories stories-index" data-current-page="stories-index">
+            <div id="page-content-inner">
+
+                <div class="brand-bg">
+
+                    <div class="crayons-layout crayons-layout--limited-l pt-7 m:pt-9">
+                        <header class="mt-2 profile-header crayons-card">
+                            <div class="relative profile-header__top">
+                                <span class="crayons-avatar crayons-avatar--3xl">
+                                    <img src="/<%= user.Image %>"  width="128" height="128"
+                                    alt="<%= user.name %> profile picture" class="crayons-avatar__image">
+                                </span>
+                            </div>
+                            <div class="profile-header__details">
+                                <h1 class="mb-2 crayons-title fw-heavy">
+                                    <%= user.name %>
+                                </h1>
+                                <% if (user._id.toString() !== currentUser._id.toString()) { %>
+                                    <a href="/messages/<%= user._id %>"><i class="far fa-envelope btn border border-info mr-3"></i></a>
+                                    <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
+                                    <% } %>
+                                        <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
+                                            <% if (user.bio) { %>
+                                                <%=user.bio%>
+                                                    <% } else { %>
+                                                        please complete your profile
+                                                        <%}%>
+                                        </p>
+                                        <div class="profile-header__meta">
+                                            <% if(user.country) { %>
+                                                <span class="profile-header__meta__item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" role="img"
+                                                aria-labelledby="ajrrqijsqelmczu6fuyonzk2o2aipwjf"
+                                                class="mr-2 crayons-icon shrink-0">
+                                                <title id="ajrrqijsqelmczu6fuyonzk2o2aipwjf">Location</title>
+                                                <path
+                                                    d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1112.728 0zM12 13a2 2 0 100-4 2 2 0 000 4z">
+                                                </path>
+                                            </svg>
+                                            <a href="https://www.google.com/maps/place/<%=user.country %>"
+                                                target="_blank">
+                                                <%= user.country %>
+                                            </a>
+                                        </span>
+                                                <% } %>
+                                                    <% if(user.yearOfBirth) { %>
+                                                        <span class="profile-header__meta__item">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" role="img"
+                                                        aria-labelledby="anjkwa5vdl5arp7w1vfot5espto7wmqu"
+                                                        class="mr-2 crayons-icon shrink-0">
+                                                        <title id="anjkwa5vdl5arp7w1vfot5espto7wmqu">Joined</title>
+                                                        <path
+                                                            d="M8 6v3.999h3V6h2v3.999h3V6h2v3.999L19 10a3 3 0 012.995 2.824L22 13v1c0 1.014-.377 1.94-.999 2.645L21 21a1 1 0 01-1 1H4a1 1 0 01-1-1v-4.36a4.025 4.025 0 01-.972-2.182l-.022-.253L2 14v-1a3 3 0 012.824-2.995L5 10l1-.001V6h2zm11 6H5a1 1 0 00-.993.883L4 13v.971l.003.147a2 2 0 003.303 1.4c.363-.312.602-.744.674-1.218l.015-.153.005-.176c.036-1.248 1.827-1.293 1.989-.134l.01.134.004.147a2 2 0 003.992.031l.012-.282c.124-1.156 1.862-1.156 1.986 0l.012.282a2 2 0 003.99 0L20 14v-1a1 1 0 00-.883-.993L19 12zM7 1c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 11-2.898-.776C5.85 2.002 7 2.5 7 1zm5 0c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 01-2.898-.776C10.85 2.002 12 2.5 12 1zm5 0c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 01-2.898-.776C15.85 2.002 17 2.5 17 1z">
+                                                        </path>
+                                                    </svg>
+
+                                                    <time datetime="2019-08-27T04:14:12Z" class="date">
+                                                        Born in <%= user.yearOfBirth %>
+                                                    </time>
+                                                </span>
+                                                        <% } %>
+                                                            <%if (user.nativeLang) {%>
+                                                                <i style="font-size: x-large;" class="fas fa-language"></i>
+                                                                <p> &nbsp;
+                                                                    <%=user.nativeLang%>
+                                                                </p>
+                                                                <%}%>
+                                                                    &nbsp
+                                                                    <%if (user.gender) {%>
+                                                                        <i style="font-size: x-large;" class="fas fa-venus-mars"></i>
+                                                                        <p> &nbsp;
+                                                                            <%=user.gender%>
+                                                                        </p>
+                                                                        <%}%>
+
+
+                                                                            <!-- ===================== BEGINNING OF USER ICONS =================== -->
+                                                                            <span class="-ml-1 profile-header__meta__item">
+                                                        <!-- if twitter -->
+                                                        <% user.websites.forEach( function(link) { %>
+                                                            <% if(link.includes("twitter")) { %>
+                                                                <a href="<%= link %>" target="_blank" rel="noopener me"
+                                                                    class="inline-block px-1 align-middle">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" role="img"
+                                                                        aria-labelledby="asvbuum4kw8vemhcg889mu56yavgzwd7"
+                                                                        class="crayons-icon">
+                                                                        <title id="asvbuum4kw8vemhcg889mu56yavgzwd7">
+                                                                            Twitter logo
+                                                                        </title>
+                                                                        <path
+                                                                            d="M22.162 5.656a8.383 8.383 0 01-2.402.658A4.196 4.196 0 0021.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 00-7.126 3.814 11.874 11.874 0 01-8.62-4.37 4.168 4.168 0 00-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 01-1.894-.523v.052a4.185 4.185 0 003.355 4.101 4.211 4.211 0 01-1.89.072A4.185 4.185 0 007.97 16.65a8.395 8.395 0 01-6.191 1.732 11.83 11.83 0 006.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.495 8.495 0 002.087-2.165l-.001-.001z"
+                                                                            fill="#65bbf2"></path>
+                                                                    </svg>
+
+                                                                </a>
+                                                                <% } %>
+
+                                                                    <!-- if github -->
+                                                                    <% if(link.includes("github")) { %>
+                                                                        <a href="<%= link %>" target="_blank"
+                                                                            rel="noopener me"
+                                                                            class="inline-block px-1 align-middle">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" role="img"
+                                                                                aria-labelledby="a5nl481y7j37phzbyqnjerkf4zvrrws5"
+                                                                                class="crayons-icon">
+                                                                                <title
+                                                                                    id="a5nl481y7j37phzbyqnjerkf4zvrrws5">
+                                                                                    GitHub logo
+                                                                                </title>
+                                                                                <path
+                                                                                    d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 006.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 012.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0022 12c0-5.525-4.475-10-10-10z">
+                                                                                </path>
+                                                                            </svg>
+
+                                                                        </a>
+                                                                        <% } %>
+
+                                                                            <!-- if linkedin -->
+                                                                            <% if(link.includes("linkedin")) { %>
+                                                                                <a href="<%= link %>" target="_blank"
+                                                                                    rel="noopener me"
+                                                                                    class="inline-block px-1 align-middle">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24" height="24"
+                                                                                        viewBox="0 0 24 24" role="img"
+                                                                                        aria-labelledby="ak6r3gjdfrurvdom6zjq82ha9drfv80w"
+                                                                                        class="crayons-icon">
+                                                                                        <title
+                                                                                            id="ak6r3gjdfrurvdom6zjq82ha9drfv80w">
+                                                                                            LinkedIn logo</title>
+                                                                                        <path
+                                                                                            d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715h-.001zM7.003 8.575a1.546 1.546 0 01-1.287-2.409 1.548 1.548 0 111.286 2.409h.001zm1.336 9.764H5.666V9.75H8.34v8.589h-.001zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.004z">
+                                                                                        </path>
+                                                                                    </svg>
+
+                                                                                </a>
+                                                                                <% } %>
+
+                                                                                    <!-- if stackoverflow -->
+                                                                                    <% if(link.includes("stackoverflow"))
+                                                                                        { %>
+                                                                                        <a href="<%= link %>"
+                                                                                            target="_blank"
+                                                                                            rel="noopener me"
+                                                                                            class="inline-block px-1 align-middle">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="24" height="24"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                role="img"
+                                                                                                aria-labelledby="a280n9hh26830f9q5y3lbak50hj9k6q9"
+                                                                                                class="crayons-icon">
+                                                                                                <title
+                                                                                                    id="a280n9hh26830f9q5y3lbak50hj9k6q9">
+                                                                                                    StackOverflow logo
+                                                                                                </title>
+                                                                                                <path
+                                                                                                    d="M18 20.002V14.67h2v7.333H4V14.67h2v5.333h12v-.001zM7.599 14.736l.313-1.98 8.837 1.7-.113 1.586-9.037-1.306zm1.2-4.532l.732-1.6 7.998 3.733-.733 1.599-7.998-3.732h.001zm2.265-3.932l1.133-1.333 6.798 5.665-1.133 1.333-6.798-5.665zm4.332-4.132l5.265 7.064-1.4 1.067-5.264-7.065 1.4-1.066h-.001zM7.332 18.668v-2h9.33v2h-9.33z">
+                                                                                                </path>
+                                                                                            </svg>
+
+                                                                                        </a>
+                                                                                        <% } %>
+
+                                                                                            <% if(link.includes("instagram"))
+                                                                                                { %>
+                                                                                                <a href="<%= link %>"
+                                                                                                    target="_blank"
+                                                                                                    rel="noopener nofollow me"
+                                                                                                    class="inline-block px-1 align-middle">
+                                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="24"
+                                                                                                        height="24"
+                                                                                                        viewBox="0 0 24 24"
+                                                                                                        role="img"
+                                                                                                        aria-labelledby="aekt8ogeq8yiwrqcbfl23u1jjduau1u8"
+                                                                                                        class="crayons-icon">
+                                                                                                        <title
+                                                                                                            id="aekt8ogeq8yiwrqcbfl23u1jjduau1u8">
+                                                                                                            Instagram
+                                                                                                            logo
+                                                                                                        </title>
+                                                                                                        <path
+                                                                                                            d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z">
+                                                                                                        </path>
+                                                                                                    </svg>
+
+                                                                                                </a>
+                                                                                                <% } %>
+                                                                                                    <% }) %>
+                                                    </span>
+
+                                                                            <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
+                                                                            <% if(userid==user._id ) { %>
+
+                                                                                <span>
+                                                            <a href="/users/updateProfile"
+                                                                class="btn btn-outline-info">Edit
+                                                                Profile</a>
+                                                        </span>
+                                                                                <% } %>
+                                        </div>
+                            </div>
+                            <div class="profile-header__bottom fs-base">
+                                <a class="btn border border-info" style="color:#702C91" href="/users/<%= user.username %>/following"><span id="followingValue"><%= user.following.length %></span> following</a>
+                                <a class="btn border border-info" style="color:#702C91" href="/users/<%= user.username %>/followers"><span id="followerValue"><%= user.followers.length %></span> followers</a>
+                                <!-- <div class="crayons-definition">
+                                    <strong class="crayons-definition__title">Education</strong>
+                                    <p class="crayons-definition__value">FCI, Egypt</p>
+                                </div>
+                                <div class="crayons-definition">
+                                    <strong class="crayons-definition__title">Work</strong>
+                                    <p class="crayons-definition__value">
+                                        Student
+                                    </p>
+                                </div>
+                                <div class="crayons-definition">
+                                    <strong class="crayons-definition__title">Work status</strong>
+                                    <p class="crayons-definition__value">I am looking for work!</p>
+                                </div> -->
+                            </div>
+                        </header>
+                    </div>
+                </div>
+
+                <div class="pt-4 crayons-layout crayons-layout--limited-l crayons-layout--2-cols crayons-layout--2-cols--1-2 m:pt-0" id="index-container" data-params="{&quot;user_id&quot;:219080,&quot;class_name&quot;:&quot;Article&quot;,&quot;sort_by&quot;:&quot;published_at&quot;,&quot;sort_direction&quot;:&quot;desc&quot;}"
+                    data-which="articles" data-tag="" data-feed="base-feed" data-articles-since="0">
+
+                    <div class="crayons-layout__sidebar-left">
+                        <div class="hidden gap-2 m:gap-4 m:grid js-user-info">
+                            <% if(user.skills.length !== 0) { %>
+                                <div class="crayons-card crayons-card--secondary">
+                                    <header class="crayons-card__header">
+                                        <h3 class="crayons-subtitle-3">Skills/languages</h3>
+                                    </header>
+                                    <div class="crayons-card__body">
+                                        <% user.skills.forEach(function(skill){ %>
+                                            <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
+                                                <%= skill %>
+                                            </span>
+                                            <% }) %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <!-- render this div if and only the userRepos is not empty -->
+                                    <% if(userRepos.length> 0) { %>
+
+                                        <div class="crayons-card crayons-card--secondary">
+                                            <!-- <header class="crayons-card__header">
+                                            <h3 class="crayons-subtitle-3">Projects</h3>
+                                        </header> -->
+                                            <!-- iterate through every project and display it -->
+                                            <ul class="list-group">
+                                                <h3 class="crayons-subtitle-3 list-group-item list-group-item-info">
+                                                    Projects
+                                                </h3>
+                                                <% userRepos.forEach(function(repo) { %>
+                                                    <a href="<%= repo.repoUrl %>">
+                                                        <li class="list-group-item">
+                                                            <%= repo.repoName %>
+                                                        </li>
+                                                    </a>
+                                                    <% }) %>
+                                            </ul>
+
+
+                                        </div>
+                                        <% } %>
+                                            <% if(user.bookmarks.length !== 0) { %>
+
+                                                <%if(user.bookmarks) {%>
+                                                    <div class="crayons-card crayons-card--secondary">
+                                                        <header class="crayons-card__header">
+                                                            <h3 class="crayons-subtitle-3">Your Bookmarks</h3>
+                                                        </header>
+
+                                                        <div class="crayons-card__body">
+                                                            <% user.bookmarks.forEach(function(bookmark){ %>
+                                                                <a style="text-decoration: none;" href="/roadmaps/<%=bookmark.routeName %>">
+                                                                    <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
+                                                                <%= bookmark.title %>
+                                                            </span>
+                                                                </a>
+                                                                <% }) %>
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+                                                        <% } %>
+
+                                                            <div class="p-4 crayons-card crayons-card--secondary">
+                                                                <div class="flex items-center mb-4">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
+                                                        <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
+                                                        <path
+                                                            d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
+                                                        </path>
+                                                    </svg>
+
+                                                                    <a href="/users/profile/<%= user.username %>">
+                                                                        <%= postsCount %> posts published </a>
+                                                                </div>
+                                                                <div class="flex items-center mb-4">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt" class="mr-3 crayons-icon color-base-50">
+                                                        <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
+                                                        <path
+                                                            d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
+                                                        </path>
+                                                    </svg>
+                                                                    <a href="/users/profile/<%= user.username %>?comments=true">
+                                                                        <%=commentCount%> comments written</a>
+                                                                </div>
+                                                            </div>
+                        </div>
+                    </div>
+
+                    <main class="crayons-layout__content articles-list" id="articles-list">
+                        <div class="substories" id="substories">
+                            <% if(userid==user._id ) { %>
+                                <!-- ================ beginning of post form -->
+                                <section class="mb-2 card">
+                                    <div class="card-body">
+                                        <!-- <form action="/posts" method="POST"> -->
+                                        <div class="p-0 m-0 card-body">
+                                            <div class="tab-content" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="post">post</label>
+                                                        <textarea style="resize: none;height:100px; border:none" class="form-control" name="post" id="post" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <!-- <input type="submit" value="share" class="btn btn-outline-success"> -->
+                                                <button type="submit" id="submitPostButton" class="button3" disabled>share</button>
+
+                                            </div>
+                                        </div>
+                                        <!-- </form> -->
+                                    </div>
+                                </section>
+                                <% } %>
+
+                                    <!-- ============= end of post form =============== -->
+                                    <!-- =============================== twitter clone ================================= -->
+                                    <div class="postContent"></div>
+
+                                    <!-- post comments modal -->
+                                    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="replyModalLabel">Reply</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="originalPostContainer"></div>
+                                                    <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="post">post</label>
+                                                            <textarea style="resize: none;height:100px" class="form-control" name="reply" id="reply" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- post delete modal -->
+                                    <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deletePostModalLabel">Delete the post?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>You won't be able to delete this.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button id="deletePostButton" type="button" class="btn btn-primary">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- edit post -->
+                                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel">Edit Post</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="editPostContainer"></div>
+                                                    <div class="tab-pane fade show active" id="editPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="post">post</label>
+                                                            <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- likers modal -->
+                                    <div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="likesModalLabel">Likes</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="similarContainer"></div>
+                                                    <!-- <div class="tab-pane fade show active" id="likesPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                </div>
+                                            </div> -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <!-- <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            /* eslint-disable */
+            var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            var selectedTap = <%- JSON.stringify(selectedTap) %>
+            var profileUser = <%- JSON.stringify(userId) %>
+        </script>
+
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script src="/js/followersAndFollwing.js"></script>
+            <script src="/js/common.js"></script>
+            <script src="/js/profile.js"></script>
+</body>
+
+
+</html>

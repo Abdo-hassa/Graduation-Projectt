@@ -1,0 +1,36 @@
+h1 {
+    text-align: center;
+}
+
+.nav-tabs-outer {
+    overflow-x: scroll;
+    margin: 20px;
+}
+
+.nav-tabs-outer>ul>li {
+    display: block;
+    width: 33.33%;
+}
+
+.tab-content {
+    background: #eee;
+}
+
+.tab-content img {
+    padding: 15px;
+    float: left;
+}
+
+.tab-content p {
+    height: 180px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.tab-pane:after {
+    content: '';
+    display: block;
+    clear: both;
+}

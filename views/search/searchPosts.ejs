@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+
+        <title>Search</title>
+
+        <link rel="stylesheet" href="/assets/css/search.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+
+
+        <style>
+            .form-search input {
+                width: 90%;
+            }
+            
+            #match-list {
+                width: 70%;
+            }
+            
+            input {
+                border: 1px solid #702C91 !important;
+            }
+            
+            input:focus {
+                outline: none !important;
+            }
+            
+            .form-control:focus {
+                border-color: inherit;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+        </style>
+
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+
+        <!-- partial:index.partial.html -->
+        <div class="container">
+
+            <form class="mt-4 form-search" method="POST" action="/search/posts">
+                <strong><h1>Search for posts</h1></strong>
+                <input id="submitButton" class="form-control mt-4" name="query" type="text" placeholder="Search for posts" aria-label="Search">
+                <a class="btn border border-info" style="color:#702C91" href="/search">want to search for users ?</a>
+            </form>
+
+            <div id="match-list" class="container"></div>
+        </div>
+
+        <!-- post comments modal -->
+        <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="replyModalLabel">Reply</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="originalPostContainer"></div>
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="post">post</label>
+                                <textarea style="resize: none;height:100px" class="form-control" name="reply" id="reply" rows="3" placeholder="What are you thinking..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- likers modal -->
+        <div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="likesModalLabel">Likes</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="similarContainer"></div>
+                        <!-- <div class="tab-pane fade show active" id="likesPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                </div>
+                                            </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- post delete modal -->
+        <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deletePostModalLabel">Delete the post?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>You won't be able to delete this.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="deletePostButton" type="button" class="btn btn-primary">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <script>
+            let selectedTap = <%- JSON.stringify(selectedTap) %>
+            let userLoggedIn = <%- JSON.stringify(user) %>
+        </script>
+
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
+            <script src="/js/common.js"></script>
+            <script src="/js/followersAndFollwing.js"></script>
+            <!-- <script src="/js/postPage.js"></script> -->
+            <script>
+                $(document).ready(function() {
+                    let userId = userLoggedIn._id
+                    let timer;
+                    let searchText;
+                    let finished = false;
+
+                    function load() {
+
+                        console.log(skip, limit);
+                        if (!finished) {
+                            $.ajax({
+                                url: `/search/posts?skip=${skip}&limit=${limit}`,
+                                method: 'POST',
+                                dataType: "json",
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    query: searchText
+                                }),
+                                success: function(data) {
+                                    console.log(data)
+                                    if (data.posts < 10) {
+                                        finished = true;
+                                    }
+                                    data.posts.map(postObj => {
+                                        var postHtml = createPostHtml(postObj, userId);
+                                        $('#match-list').append(postHtml)
+                                    })
+                                    skip = skip + limit;
+                                }
+                            })
+                        }
+                    }
+                    window.onscroll = () => {
+                        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                            load();
+                        }
+                    };
+                    $(window).keydown(function(event) {
+                        if (event.keyCode == 13) {
+                            event.preventDefault();
+                            return false;
+                        }
+                    });
+
+                    $('#match-list').bind('DOMSubtreeModified', function() {
+                        $('.crayons-story__details').html('');
+                    });
+
+                    $('#submitButton').on('change keyup paste', function(e) {
+                        clearInterval(timer)
+                        searchText = $('#submitButton').val().trim() || null;
+                        console.log(searchText)
+                        if (searchText !== null) {
+                            if (searchText.length === 0) {
+                                $('#search').val() = ''
+                            } else if (!searchText.replace(/\s/g, '').length) {
+                                return;
+                            } else {
+                                timer = setTimeout(() => {
+                                    skip = 0;
+                                    limit = 10;
+                                    if (!finished) {
+                                        $.ajax({
+                                            url: `/search/posts?skip=${skip}&limit=${limit}`,
+                                            method: 'POST',
+                                            dataType: "json",
+                                            contentType: 'application/json',
+                                            data: JSON.stringify({
+                                                query: searchText
+                                            }),
+                                            success: function(data) {
+                                                if (searchText) {
+                                                    $('#match-list').html('');
+                                                }
+                                                // to prevent user to make another requests if the posts are all fetched 
+                                                if (data.posts < 10) {
+                                                    finished = true;
+                                                }
+                                                data.posts.map(postObj => {
+                                                    var postHtml = createPostHtml(postObj, userId);
+                                                    $('#match-list').append(postHtml)
+                                                })
+                                                skip = skip + limit;
+                                            }
+                                        })
+                                    }
+                                }, 1000)
+                            }
+                        } else {
+                            $('#match-list').html('');
+                        }
+                    })
+                })
+            </script>
+</body>
+
+</html>

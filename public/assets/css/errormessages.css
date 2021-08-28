@@ -1,0 +1,58 @@
+/*---------------------------------- ERROR MESSAGES
+------------------------------------------------*/
+
+.user-message {
+    margin: auto;
+    width: 90%;
+    /* border: 1px solid #4771fa; */
+    /* padding: 1rem; */
+    border-radius: 3px;
+    /* background: #b9c9ff; */
+    text-align: center;
+    /* margin-top: 0.2rem; */
+    /* margin-bottom: 0.1rem; */
+}
+
+.user-message--error {
+    border-color: rgba(255, 0, 0, 0.712);
+    /* background: rgb(255, 176, 176); */
+    color: rgba(255, 0, 0, 0.712);
+    /* font-size: 25px;
+	font-weight: bold; */
+}
+
+.invalid {
+    border-color: red;
+    border-width: 2px;
+}
+
+.animate {
+    position: relative;
+    animation-name: move;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes move {
+    0% {
+        left: 0%;
+    }
+    50% {
+        left: 50%;
+    }
+    100% {
+        left: 0%;
+    }
+}
+
+.blinking {
+    animation-name: blinking;
+    animation-duration: 2s;
+    animation-iteration-count: 200;
+}
+
+@keyframes blinking {
+    50% {
+        border-color: #7c50e0;
+    }
+}

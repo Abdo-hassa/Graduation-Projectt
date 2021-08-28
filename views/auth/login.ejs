@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>Login</title>
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <link href="/auth/auth.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row align-items-center" style="height: 600px;">
+
+            <div class="py-4 border rounded col-md-6 offset-md-3 border-primary">
+                <form method="POST" action="/auth/login" novalidate>
+                    <h2>Login</h2>
+                    <h3>
+                        <% if (errorMassage) { %>
+                            <h3 class="user-message user-message--error animate">
+                                <%= errorMassage %>
+                            </h3>
+                            <% } %>
+                                </h4>
+
+                                <!-- TEXT FIELD GROUPS -->
+                                <div class="form-group">
+                                    <!--<label for="email">Email address</label>-->
+                                    <input class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid blinking' : '' %>" name="email" type="email" value="<%= oldInput.email %>" id="email" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <!--<label for="password">Password</label>-->
+                                    <input id="password" class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid blinking' : '' %>" name="password" value="<%= oldInput.password %>" type="password" placeholder="Password">
+                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
+                                <button class="mx-auto btn btn-primary btn-block" type="submit">Login</button>
+                                <b>
+                                <p> forgot password ? <a style="text-align: center;"
+                                    href="/auth/reset">reset</a></p>                                <b>
+                                    <p> If you don't have account ? <a style="text-align: center;"
+                                            href="/auth/register?redirectTo=<%= redirectTo %>">register
+                                            please</a></p>
+                                    <input type="hidden" name="redirectTo" value="<%= redirectTo %>">
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- far fa-eye  -->
+<!-- fa-eye-slash -->
+    <!-- bootstrap scripts -->
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+        <script src="/js/showPassword.js"></script>
+</body>
+
+</html>

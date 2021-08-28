@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title>followers || following</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/tabPanel.css">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+                <div class="mb-2 col-md-2 d-none d-md-block ">
+
+
+                    <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                </div>
+                <div class="col-lg-6 col-md-10 postContent">
+                    <h1>
+                        <%= profileUser.name %>'s
+                            <% if(selectedTab === 'followers')  { %>followers
+                                <% }else { %> followings
+                                    <% } %>
+                    </h1>
+                    <div>
+                        <ul class="nav js-tabs row justify-content-between">
+                            <li class="active text-center col"><a href="/users/<%= profileUser.username %>/following">Following</a></li>
+                            <li class="text-center col"><a href="/users/<%= profileUser.username %>/followers">Followers</a></li>
+                        </ul>
+                        <div class="resultsContainer">
+                            <!-- render followers and followings here -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
+                    <!-- maybe latest news -->
+                </div>
+            </div>
+
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
+                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+                <script>
+                    let selectedTap = <%- JSON.stringify(selectedTab) %>
+                    let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+                    let userProfileId = <%- JSON.stringify(profileUserId) %>
+                </script>
+                <script src="/js/common.js"></script>
+                <script src="/js/followersAndFollwing.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+:root {
+    --profile-brand-color: #4CA1A3;
+}
+
+textarea {
+    border: none !important;
+    background-color: transparent;
+    resize: none;
+    outline: none !important;
+}
+
+button svg,
+button span {
+    pointer-events: none;
+}
+
+.postButtonContainer.red button.active {
+    color: #702C91;
+}
+
+button:focus {
+    outline: none;
+}
+
+#submitPostButton:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.followButton {
+    border: 1px solid rgb(rgb(30, 181, 252), green, blue);
+    color: rgb(rgb(81, 159, 211), green, blue);
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 60px;
+    display: inline-block;
+    margin-left: var(--spacing);
+}
+
+.followButton.following {
+    background-color: #702C91;
+    color: #fff;
+}
+
+.noResults {
+    padding: var(--spacing);
+}
+
+.app-shell-loader {
+    display: none;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../../layouts/head.ejs') %>
+
+        <title>Dashboard</title>
+
+        <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <title>Test2</title>
+        <!-- ================== END ====================== -->
+</head>
+
+<body>
+    <%- include('../../layouts/navbar.ejs') %>
+
+        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+                <%- include('../../layouts/sidebar.ejs') %>
+
+                <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                <div class="col">
+
+                    <% if (posts !==undefined || posts !==null) { %>
+                        <% posts.forEach(function(post) { %>
+                            <div id="post" class="crayons-story " data-content-user-id="219080">
+                                <div  class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div class="crayons-story__author-pic">
+
+                                                <a href="/users/profile/<%=post.user.username%>" class="crayons-avatar crayons-avatar--l ">
+                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
+                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="/users/profile/<%=post.user.username%>" class="crayons-story__secondary fw-medium">
+                                                        <%=post.user.name%>
+                                                    </a>
+                                                </p>
+                                                <a href="/posts/<%=post._id %>" class="crayons-story__tertiary fs-xs"><time
+                                                        datetime="2020-08-08T06:46:08Z">
+                                                        <%= moment(post.createdAt).fromNow() %>
+                                                    </time><span class="time-ago-indicator-initial-placeholder"
+                                                        data-seconds="1596869168"></span></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                <%=post.description%>
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+
+                                            <% post.hashtags.forEach(function (tag) { %>
+                                                <a href="" class="crayons-tag"><span
+                                                        class="crayons-tag__prefix">#</span>
+                                                    <%= tag %>
+                                                </a>
+                                                <% }) %>
+                                        </div>
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+
+
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                <a type="button" href="/admin/dashboard/posts/edit/<%=post._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
+                                                    <span class="bm-initial">edit</span>
+                                                </a>
+                                                <input name="postId" type="hidden" value="<%=post._id%>">
+                                                <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% } %>
+
+                </div>
+                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                    <!-- aside latest news -->
+                    <aside class="widget">
+                        <div class="widget blog-widget">
+                            <h2 class="widget-header">
+
+                            </h2>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
+        <%- include('../../layouts/strapAndJQuery.ejs') %>
+
+            <script src="/assets/js/admin.js"></script>
+
+
+</body>
+
+</html>
