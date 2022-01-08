@@ -24,7 +24,7 @@ social media website targets computer science enthusiasts with three types of us
 # How it works ?
 
 1. type in your terminal
-2. _git clone <https://github.com/menaaziz27/monaqsha.git>_
+2. _git clone <https://github.com/Abdo-hassa/Graduation-Projectt.git>_
 3. _cd monaqsha_
 4. _npm install_
 
